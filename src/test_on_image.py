@@ -6,7 +6,7 @@ from PIL import Image
 from collections import OrderedDict
 from torch.nn.parallel import DataParallel, DistributedDataParallel
 import torch.nn as nn
-from src.model import RRDBNet_arch as RRDBNet_arch
+from model import RRDBNet_arch as RRDBNet_arch
 import numpy as np
 
 

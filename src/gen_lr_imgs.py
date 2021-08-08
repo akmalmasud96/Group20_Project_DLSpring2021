@@ -5,7 +5,7 @@ import random
 from threadpool import ThreadPool, makeRequests
 import os
 
-all_list = glob('./FFHQ/*')
+all_list = glob('../CelebA/img_celeba/*')
 target_size = 64
 # there are 3 quality ranges for each img
 quality_ranges = [(15, 75)]

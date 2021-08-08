@@ -4,12 +4,12 @@ from torchvision.utils import save_image
 from torch.utils.data import DataLoader
 from torch.autograd import Variable
 
-from src.dataset.datasets import *
+from dataset.datasets import *
 
 import torch.nn as nn
 import torch.nn.functional as F
 import torch
-from src.model import RRDBNet_arch as RRDBNet_arch
+from model import RRDBNet_arch as RRDBNet_arch
 from collections import OrderedDict
 from torch.nn.parallel import DistributedDataParallel
 import lpips
@@ -34,10 +34,12 @@ if __name__ == '__main__':
     os.makedirs("../Checkpoints", exist_ok=True)
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("--epoch", type=int, default=3, help="epoch to start training from")
+    parser.add_argument("--epoch", type=int, default=0, help="epoch to start training from")
     parser.add_argument("--n_epochs", type=int, default=10, help="number of epochs of training")
-    parser.add_argument("--dataset_name", type=str, default="CelebAHQ512x512", help="name of the dataset")
-    parser.add_argument("--batch_size", type=int, default=8, help="size of the batches")
+    parser.add_argument("--dataset_name", type=str, default="FFHQ", help="name of the dataset")
+    parser.add_argument("--HR_images_path", type=str, default="../FFHQ", help="Path to High Resolution Images")
+    parser.add_argument("--LR_images_path", type=str, default="../lr_64", help="Path to low Resolution Images")
+    parser.add_argument("--batch_size", type=int, default=4, help="size of the batches")
     parser.add_argument("--lr", type=float, default=0.0001, help="adam: learning rate")
     parser.add_argument("--b1", type=float, default=0.9, help="adam: decay of first order momentum of gradient")
     parser.add_argument("--b2", type=float, default=0.999, help="adam: decay of first order momentum of gradient")
@@ -82,7 +84,7 @@ if __name__ == '__main__':
     Tensor = torch.cuda.FloatTensor if torch.cuda.is_available() else torch.Tensor
     print(opt.dataset_name)
     dataloader = DataLoader(
-        ImageDataset("../FFHQ", "../lr_64", hr_shape=hr_shape),
+        ImageDataset(opt.HR_images_path, opt.LR_images_path, hr_shape=hr_shape),
         batch_size=opt.batch_size,
         shuffle=True,
         num_workers=opt.n_cpu,

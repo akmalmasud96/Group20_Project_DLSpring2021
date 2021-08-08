@@ -2,7 +2,7 @@ import functools
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from src.utills import module_util as mutil
+from utills import module_util as mutil
 from torchvision.models import vgg19
 
 
