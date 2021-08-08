@@ -69,7 +69,12 @@ image in the test_images folder and give path while running the cmd. Results wil
 cd src
 python test_on_image.py --image_path ../test_images/02220.png
 ```
+## Dataset
+Dataset we used for this project is FFHQ-512, which available on the given link.
 
+```
+https://www.kaggle.com/arnaud58/flickrfaceshq-dataset-ffhq
+```
 
 ## Train the model
 For training the model first you have to run the gen_lr_imgs.py by defining the path of your dataset images in the file. 
